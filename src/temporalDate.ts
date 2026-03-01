@@ -25,7 +25,10 @@ export class TemporalDate {
    */
   static convertToAnotherTimezone(timezone: string, value: TemporalDate) {
     const instant = value.zoned.toInstant();
-    return new this({ timezone, locale: value.locale }, instant.epochMilliseconds);
+    return new this(
+      { timezone, locale: value.locale },
+      instant.epochMilliseconds,
+    );
   }
 
   /** @internal The internal Temporal.ZonedDateTime instance. */
@@ -68,8 +71,8 @@ export class TemporalDate {
     ...args: (number | string | Date)[]
   ) {
     this.zoned = getZonedDateFromArgs(options.timezone, args);
-    if(options.locale) {
-      this.locale=options.locale;
+    if (options.locale) {
+      this.locale = options.locale;
     }
   }
 
@@ -743,7 +746,7 @@ export class TemporalDate {
    * ```
    */
   getTimezoneOffset() {
-    return (this.zoned.offsetNanoseconds / 60_000_000_000)*-1;
+    return (this.zoned.offsetNanoseconds / 60_000_000_000) * -1;
   }
 
   /**
@@ -760,7 +763,10 @@ export class TemporalDate {
    * console.log(date.toLocaleString("en-US", { dateStyle: "full" }));
    * ```
    */
-  toLocaleString(locale: string | undefined = this.locale, options?: Intl.DateTimeFormatOptions) {
+  toLocaleString(
+    locale: string | undefined = this.locale,
+    options?: Intl.DateTimeFormatOptions,
+  ) {
     return this.zoned.toLocaleString(locale, options);
   }
 

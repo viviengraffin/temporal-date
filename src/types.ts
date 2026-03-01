@@ -9,6 +9,6 @@ export type ZonedDateTimeModifications = {
 };
 
 export type DateOptions = {
-  timezone: string,
-  locale?: string
+  timezone: string;
+  locale?: string;
 };

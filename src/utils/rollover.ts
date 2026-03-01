@@ -88,8 +88,9 @@ export function managerConstructorRollover([
   minute = 0,
   second = 0,
   millisecond = 0,
-]: [number, number, number, number, number, number, number]): Required<ZonedDateTimeModifications> {
-
+]: [number, number, number, number, number, number, number]): Required<
+  ZonedDateTimeModifications
+> {
   if (year >= 0 && year < 100) year += 1900;
 
   month++;
@@ -151,7 +152,7 @@ export function managerConstructorRollover([
     daysInMonth = getDaysOfMonth(year, month);
     day += daysInMonth;
   }
-  daysInMonth=getDaysOfMonth(year,month);
+  daysInMonth = getDaysOfMonth(year, month);
   while (day > daysInMonth) {
     day -= daysInMonth;
     month++;

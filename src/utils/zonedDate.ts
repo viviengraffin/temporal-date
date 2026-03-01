@@ -69,7 +69,9 @@ export function getZonedDateFromArgs(
       minute,
       second,
       millisecond,
-     } = managerConstructorRollover(args as [number,number,number,number,number,number,number]);
+    } = managerConstructorRollover(
+      args as [number, number, number, number, number, number, number],
+    );
 
     const plainDate = new Temporal.PlainDateTime(
       year,
@@ -78,7 +80,7 @@ export function getZonedDateFromArgs(
       hour,
       minute,
       second,
-      millisecond
+      millisecond,
     );
 
     return plainDate.toZonedDateTime(timezone);

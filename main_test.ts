@@ -3,12 +3,12 @@ import {
   alterZonedDateTime,
   convertToAnotherTimezone,
   getZonedDateFromArgs,
-} from "./src/utils/zonedDate.ts"
+} from "./src/utils/zonedDate.ts";
 
 import {
-managerConstructorRollover,
-  manageRollover
-} from "./src/utils/rollover.ts"
+  managerConstructorRollover,
+  manageRollover,
+} from "./src/utils/rollover.ts";
 
 Deno.test("getZonedDateFromArgs - timestamp", () => {
   const date = getZonedDateFromArgs("Europe/Paris", [1675238400000]);
@@ -34,39 +34,79 @@ Deno.test("getZonedDateFromArgs - invalid timezone", () => {
 
 Deno.test("manageRollover - day overflow", () => {
   const result = manageRollover({
-    year: 2023, month: 12, day: 32, hour: 0, minute: 0, second: 0, millisecond: 0
+    year: 2023,
+    month: 12,
+    day: 32,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
   });
   assertEquals(result, {
-    year: 2024, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0
+    year: 2024,
+    month: 1,
+    day: 1,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
   });
 });
 
 Deno.test("manageRollover - negative day", () => {
   const result = manageRollover({
-    year: 2023, month: 1, day: -1, hour: 0, minute: 0, second: 0, millisecond: 0
+    year: 2023,
+    month: 1,
+    day: -1,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
   });
   assertEquals(result, {
-    year: 2022, month: 12, day: 30, hour: 0, minute: 0, second: 0, millisecond: 0
+    year: 2022,
+    month: 12,
+    day: 30,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
   });
 });
 
 Deno.test("manageRollover - leap year", () => {
   const result = manageRollover({
-    year: 2024, month: 2, day: 30, hour: 0, minute: 0, second: 0, millisecond: 0
+    year: 2024,
+    month: 2,
+    day: 30,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
   });
   assertEquals(result, {
-    year: 2024, month: 3, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0
+    year: 2024,
+    month: 3,
+    day: 1,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
   });
 });
 
 Deno.test("alterZonedDateTime - basic modification", () => {
-  const zoned = Temporal.ZonedDateTime.from("2023-01-01T00:00:00[Europe/Paris]");
+  const zoned = Temporal.ZonedDateTime.from(
+    "2023-01-01T00:00:00[Europe/Paris]",
+  );
   const modified = alterZonedDateTime(zoned, { day: 2 });
   assertEquals(modified.day, 2);
 });
 
 Deno.test("convertToAnotherTimezone - basic conversion", () => {
-  const zoned = Temporal.ZonedDateTime.from("2023-01-01T00:00:00[Europe/Paris]");
+  const zoned = Temporal.ZonedDateTime.from(
+    "2023-01-01T00:00:00[Europe/Paris]",
+  );
   const converted = convertToAnotherTimezone("UTC", zoned);
   assertEquals(converted.timeZoneId, "UTC");
 });
