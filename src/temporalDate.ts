@@ -48,7 +48,7 @@ export class TemporalDate {
    * const copy = TemporalDate.from(original);
    * ```
    */
-  static from(date: TemporalDate) {
+  static from(date: TemporalDate): TemporalDate {
     return new this({ timezone: date.zoned.timeZoneId, locale: date.locale }, date.getTime());
   }
 
