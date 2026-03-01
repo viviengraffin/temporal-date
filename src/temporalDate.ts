@@ -23,7 +23,10 @@ export class TemporalDate {
    * const parisDate = TemporalDate.convertToAnotherTimezone("Europe/Paris", date);
    * ```
    */
-  static convertToAnotherTimezone(timezone: string, value: TemporalDate) {
+  static convertToAnotherTimezone(
+    timezone: string,
+    value: TemporalDate,
+  ): TemporalDate {
     const instant = value.zoned.toInstant();
     return new this(
       { timezone, locale: value.locale },
@@ -87,7 +90,7 @@ export class TemporalDate {
    * const utcDate = date.utc;
    * ```
    */
-  protected get utc() {
+  protected get utc(): Temporal.ZonedDateTime {
     return TemporalDate.convertToAnotherTimezone("UTC", this).zoned;
   }
 
@@ -137,7 +140,7 @@ export class TemporalDate {
    * console.log(date.getFullYear()); // 2023
    * ```
    */
-  getFullYear() {
+  getFullYear(): number {
     return this.zoned.year;
   }
 
@@ -175,7 +178,7 @@ export class TemporalDate {
    * console.log(date.getYear()); // 99
    * ```
    */
-  getYear() {
+  getYear(): number {
     const year = this.getFullYear();
 
     if (year >= 1900 && year < 2000) {
@@ -198,7 +201,7 @@ export class TemporalDate {
    * date.setYear(2024); // Sets year to 2024
    * ```
    */
-  setYear(year: number) {
+  setYear(year: number): number {
     return this.update({ year: year >= 0 && year < 100 ? year + 1900 : year });
   }
 
@@ -213,7 +216,7 @@ export class TemporalDate {
    * console.log(date.getUTCFullYear());
    * ```
    */
-  getUTCFullYear() {
+  getUTCFullYear(): number {
     return this.utc.year;
   }
 
@@ -249,7 +252,7 @@ export class TemporalDate {
    * console.log(date.getMonth()); // 9 (October)
    * ```
    */
-  getMonth() {
+  getMonth(): number {
     return this.zoned.month - 1;
   }
 
@@ -284,7 +287,7 @@ export class TemporalDate {
    * console.log(date.getUTCMonth());
    * ```
    */
-  getUTCMonth() {
+  getUTCMonth(): number {
     return this.utc.month - 1;
   }
 
@@ -318,7 +321,7 @@ export class TemporalDate {
    * console.log(date.getDate()); // 5
    * ```
    */
-  getDate() {
+  getDate(): number {
     return this.zoned.day;
   }
 
@@ -334,7 +337,7 @@ export class TemporalDate {
    * date.setDate(15);
    * ```
    */
-  setDate(value: number) {
+  setDate(value: number): number {
     return this.update({ day: value });
   }
 
@@ -349,7 +352,7 @@ export class TemporalDate {
    * console.log(date.getUTCDate());
    * ```
    */
-  getUTCDate() {
+  getUTCDate(): number {
     return this.utc.day;
   }
 
@@ -365,7 +368,7 @@ export class TemporalDate {
    * date.setUTCDate(15);
    * ```
    */
-  setUTCDate(day: number) {
+  setUTCDate(day: number): number {
     return this.updateFromUTC({ day });
   }
 
@@ -380,7 +383,7 @@ export class TemporalDate {
    * console.log(date.getDay()); // 3 (Wednesday)
    * ```
    */
-  getDay() {
+  getDay(): number {
     return this.zoned.dayOfWeek % 7;
   }
 
@@ -395,7 +398,7 @@ export class TemporalDate {
    * console.log(date.getUTCDay());
    * ```
    */
-  getUTCDay() {
+  getUTCDay(): number {
     return this.utc.dayOfWeek % 7;
   }
 
@@ -410,7 +413,7 @@ export class TemporalDate {
    * console.log(date.getHours()); // 12
    * ```
    */
-  getHours() {
+  getHours(): number {
     return this.zoned.hour;
   }
 
@@ -461,7 +464,7 @@ export class TemporalDate {
    * console.log(date.getUTCHours());
    * ```
    */
-  getUTCHours() {
+  getUTCHours(): number {
     return this.utc.hour;
   }
 
@@ -509,7 +512,7 @@ export class TemporalDate {
    * console.log(date.getMinutes()); // 30
    * ```
    */
-  getMinutes() {
+  getMinutes(): number {
     return this.zoned.minute;
   }
 
@@ -547,7 +550,7 @@ export class TemporalDate {
    * console.log(date.getUTCMinutes());
    * ```
    */
-  getUTCMinutes() {
+  getUTCMinutes(): number {
     return this.utc.minute;
   }
 
@@ -583,7 +586,7 @@ export class TemporalDate {
    * console.log(date.getSeconds()); // 45
    * ```
    */
-  getSeconds() {
+  getSeconds(): number {
     return this.zoned.second;
   }
 
@@ -618,7 +621,7 @@ export class TemporalDate {
    * console.log(date.getUTCSeconds());
    * ```
    */
-  getUTCSeconds() {
+  getUTCSeconds(): number {
     return this.utc.second;
   }
 
@@ -652,7 +655,7 @@ export class TemporalDate {
    * console.log(date.getMilliseconds()); // 500
    * ```
    */
-  getMilliseconds() {
+  getMilliseconds(): number {
     return this.zoned.millisecond;
   }
 
@@ -682,7 +685,7 @@ export class TemporalDate {
    * console.log(date.getUTCMilliseconds());
    * ```
    */
-  getUTCMilliseconds() {
+  getUTCMilliseconds(): number {
     return this.utc.millisecond;
   }
 
@@ -698,7 +701,7 @@ export class TemporalDate {
    * date.setUTCMilliseconds(500);
    * ```
    */
-  setUTCMilliseconds(millisecond: number) {
+  setUTCMilliseconds(millisecond: number): number {
     return this.updateFromUTC({ millisecond });
   }
 
@@ -713,7 +716,7 @@ export class TemporalDate {
    * console.log(date.getTime());
    * ```
    */
-  getTime() {
+  getTime(): number {
     return this.zoned.epochMilliseconds;
   }
 
@@ -729,7 +732,7 @@ export class TemporalDate {
    * date.setTime(Date.now());
    * ```
    */
-  setTime(value: number) {
+  setTime(value: number): number {
     this.zoned = getZonedDateFromArgs(this.zoned.timeZoneId, [value]);
     return this.getTime();
   }
@@ -745,7 +748,7 @@ export class TemporalDate {
    * console.log(date.getTimezoneOffset());
    * ```
    */
-  getTimezoneOffset() {
+  getTimezoneOffset(): number {
     return (this.zoned.offsetNanoseconds / 60_000_000_000) * -1;
   }
 
@@ -766,7 +769,7 @@ export class TemporalDate {
   toLocaleString(
     locale: string | undefined = this.locale,
     options?: Intl.DateTimeFormatOptions,
-  ) {
+  ): string {
     return this.zoned.toLocaleString(locale, options);
   }
 
@@ -781,7 +784,7 @@ export class TemporalDate {
    * console.log(date.toISOString());
    * ```
    */
-  toISOString() {
+  toISOString(): string {
     return this.utc.toInstant().toString();
   }
 
@@ -796,7 +799,7 @@ export class TemporalDate {
    * console.log(date.toJSON());
    * ```
    */
-  toJSON() {
+  toJSON(): string {
     return this.toISOString();
   }
 }
