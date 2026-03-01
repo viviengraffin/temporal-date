@@ -34,6 +34,24 @@ export class TemporalDate {
     );
   }
 
+  /**
+   * Creates a new TemporalDate instance from an existing TemporalDate.
+   * The new instance will have the same timezone and locale as the source date,
+   * but will be a distinct object.
+   *
+   * @param date - The source TemporalDate to copy.
+   * @returns A new TemporalDate instance with the same timezone, locale, and epoch time as the source.
+   *
+   * @example
+   * ```ts
+   * const original = new TemporalDate({ timezone: "Europe/Paris" });
+   * const copy = TemporalDate.from(original);
+   * ```
+   */
+  static from(date: TemporalDate) {
+    return new this({ timezone: date.zoned.timeZoneId, locale: date.locale }, date.getTime());
+  }
+
   /** @internal The internal Temporal.ZonedDateTime instance. */
   protected zoned: Temporal.ZonedDateTime;
   /** @internal The locale for formatting. */
@@ -69,6 +87,10 @@ export class TemporalDate {
   constructor(options: DateOptions, string: string);
   constructor(options: DateOptions, date: Date);
   constructor(options: DateOptions, year: number, month: number);
+  constructor(options: DateOptions, year: number, month: number, day: number);
+  constructor(options: DateOptions, year: number, month: number, day: number, hour: number);
+  constructor(options: DateOptions, year: number, month: number, day: number, hour: number, second: number);
+  constructor(options: DateOptions, year: number, month: number, day: number, hour: number, second: number, millisecond: number);
   constructor(
     options: DateOptions,
     ...args: (number | string | Date)[]
